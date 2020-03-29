@@ -36,10 +36,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - images/corona.png
-    - images/virus.png
-    - images/virus2.png
-    - images/covid19.png
     - images/calci.png
   #   - images/a_dot_ham.jpeg
 
