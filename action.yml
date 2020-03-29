@@ -1,0 +1,40 @@
+name: Flutter Web 
+
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      description: 'CHECKOUT'
+      uses: actions/checkout@v2
+      
+    - name: Setup Flutter
+      description: 'SETTING UP FLUTTER IN VIRTUAL ENV'
+      uses: subosito/flutter-action@v1
+      with:
+        channel: 'beta'
+        
+    - name: Enable Flutter web 
+      description: 'ENABLES FLUTTER WEB'
+      run: flutter config --enable-web
+      
+    - name: Install dependencies
+      description: 'GET DEPENDENCIES FROM pubspec.yaml FILE'
+      run: flutter packages get
+      
+    - name: Build web
+      description: 'Builds web version of your project'
+      run: flutter build web
+      
+    - name: Deploy
+      description: 'Deploys to Github Pages'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.token }}
+        publish_dir: ./build/web
